@@ -1,0 +1,16 @@
+.flex-container {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-flow: row wrap;
+    flex-flow: row wrap;
+}
+
+.flex-item, .flex1 {
+    -webkit-flex: 1 auto;
+    flex: 1 auto;
+}
+
+.flex2 {
+    -webkit-flex: 2 auto;
+    flex: 2 auto;
+}

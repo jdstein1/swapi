@@ -4,3 +4,49 @@ body {
   background:#eee;
   color:#111;
 }
+
+main {
+  background:#eef;
+  padding:1em;
+  margin:0;
+}
+
+aside {
+  background:#fee;
+  padding:1em;
+  margin:0;
+}
+
+article {
+  background:#efe;
+  padding:1em;
+  margin:0;
+}
+
+.card {
+  background:#ccc;
+  padding:1em;
+  margin:0 0 1em;
+}
+
+aside > .card {
+  background:#cdd;
+}
+
+article > .card {
+  background:#dcd;
+}
+
+.movie {
+  background:#ddc;
+  padding:1em;
+  margin:0;
+}
+
+.card > .movie:first-of-type {
+  margin-right:0.25em;
+}
+
+.card > .movie:last-of-type {
+  margin-left:0.25em;
+}

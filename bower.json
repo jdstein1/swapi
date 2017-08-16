@@ -1,0 +1,14 @@
+{
+  "name": "swapi",
+  "version": "0.0.1",
+  "homepage": "https://github.com/jdstein1/swapi",
+  "authors": [
+    "Jeff S. <jdstein1@gmail.com>"
+  ],
+  "description": "Star Wars API Coding Exercise",
+  "main": "server.js",
+  "license": "ISC",
+  "dependencies": {
+    "bootstrap": "^3.3.7"
+  }
+}

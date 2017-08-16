@@ -4,36 +4,62 @@
   <meta charset="UTF-8">
   <title>Star Wars API Coding Exercise</title>
   <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="bower_stuff/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="bower_stuff/bootstrap/dist/css/bootstrap-theme.min.css">
+  <link rel="stylesheet" href="css/flex.css">
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-  <main>
-    <aside>
+  <main class="flex-container">
+    <aside class="flex-item">
       <!-- Sidebar modules -->
-      <div>
+      <div class="card">
         <h3>Favorite Character</h3>
+        <ul>
+          <li>Greedo</li>
+        </ul>
       </div>
-      <div>
+      <div class="card">
         <h3>Least Favorite Character</h3>
+        <ul>
+          <li>Greedo</li>
+        </ul>
       </div>
-      <div>
+      <div class="card">
         <h3>How long are those opening crawls?</h3>
+        <ul>
+          <li>Greedo</li>
+        </ul>
       </div>
     </aside>
-    <article>
+    <article class="flex-item flex-container">
       <!-- Movie Cards -->
-      <div>
-        <img src="movie_poster.jpg" alt="Movie Title">
-        <h2>Movie Title</h2>
-        <h4>Director</h4>
-        <ul>
-          <li>Main Character 1</li>
-          <li>Main Character 2</li>
-          <li>Main Character 3</li>
-        </ul>
+      <div class="flex-item card flex-container">
+        <div class="flex-item movie">
+          <img src="movie_poster.jpg" alt="Movie Title">
+          <h2>Movie Title</h2>
+          <h4>Director</h4>
+          <ul>
+            <li>Main Character 1</li>
+            <li>Main Character 2</li>
+            <li>Main Character 3</li>
+          </ul>
+        </div>
+        <div class="flex-item movie">
+          <img src="movie_poster.jpg" alt="Movie Title">
+          <h2>Movie Title</h2>
+          <h4>Director</h4>
+          <ul>
+            <li>Main Character 1</li>
+            <li>Main Character 2</li>
+            <li>Main Character 3</li>
+          </ul>
+        </div>
       </div>
     </article>
   </main>
+  <script src="bower_stuff/jquery/dist/jquery.min.js"></script>
+  <script src="bower_stuff/bootstrap/dist/js/bootstrap.min.js"></script>
   <script src="js/scripts.js"></script>
-</body>
+  </body>
 </html>

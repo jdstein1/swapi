@@ -1,0 +1,23 @@
+{
+  "name": "swapi",
+  "version": "0.0.1",
+  "description": "Star Wars API Coding Exercise",
+  "main": "server.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jdstein1/swapi.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jdstein1/swapi/issues"
+  },
+  "homepage": "https://github.com/jdstein1/swapi#readme",
+  "devDependencies": {
+    "express": "^4.15.4",
+    "nodemon": "^1.11.0"
+  }
+}
