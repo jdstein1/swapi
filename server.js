@@ -6,7 +6,8 @@ const app = express()
 
 console.log('__dirname: ', __dirname)
 
-app.use(express.static('src'))
+// app.use(express.static('src'))
+app.use(express.static(__dirname + '/src'))
 // app.use('/public', express.static(__dirname + 'src'))
 // app.use('/', express.static(path.join(__dirname, 'src')))
 
