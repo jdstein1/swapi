@@ -3,6 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <title>Star Wars API Coding Exercise</title>
+
+  <script src="bower_components/ejs/ejs.min.js"></script>
+
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-theme.min.css">
@@ -10,33 +13,33 @@
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
+  <div id="ejs"></div>
   <main class="flex-container">
     <aside class="flex-item">
       <!-- Sidebar modules -->
       <div class="card">
         <h3>Favorite Character</h3>
         <ul>
-          <li>Greedo</li>
+          <li id="favMost"></li>
         </ul>
       </div>
       <div class="card">
         <h3>Least Favorite Character</h3>
         <ul>
-          <li>Greedo</li>
+          <li id="favLeast"></li>
         </ul>
       </div>
       <div class="card">
         <h3>How long are those opening crawls?</h3>
-        <ul>
-          <li>Greedo</li>
-        </ul>
+        <dl id="crawls"></dl>
+        <canvas id="graph"></canvas>
       </div>
     </aside>
-    <article class="flex-item flex-container">
+    <article class="flex-item deck flex-container">
       <!-- Movie Cards -->
       <div class="flex-item card flex-container">
         <div class="flex-item movie">
-          <img src="movie_poster.jpg" alt="Movie Title">
+          <!-- <img src="movie_poster.jpg" alt="Movie Title"> -->
           <h2>Movie Title</h2>
           <h4>Director</h4>
           <ul>
@@ -46,7 +49,7 @@
           </ul>
         </div>
         <div class="flex-item movie">
-          <img src="movie_poster.jpg" alt="Movie Title">
+          <!-- <img src="movie_poster.jpg" alt="Movie Title"> -->
           <h2>Movie Title</h2>
           <h4>Director</h4>
           <ul>
@@ -60,7 +63,8 @@
   </main>
   <script src="bower_components/jquery/dist/jquery.min.js"></script>
   <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-  <script src="bower_components/ejs/ejs.min.js"></script>
+  <script src="js/config.js"></script>
+  <script src="js/service.js"></script>
   <script src="js/scripts.js"></script>
   </body>
 </html>

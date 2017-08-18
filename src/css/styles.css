@@ -50,3 +50,19 @@ article > .card {
 .card > .movie:last-of-type {
   margin-left:0.25em;
 }
+
+dl {}
+dt {
+  font-weight: normal;
+  display: block;
+}
+dt:before {
+  content:'•';
+  margin: 0 0.25em;
+  padding: 0 0.25em;
+}
+dd {
+  font-weight: bold;
+  display: inline-block;
+  margin-left: 0.5em;
+}
