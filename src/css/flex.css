@@ -14,3 +14,8 @@
     -webkit-flex: 2 auto;
     flex: 2 auto;
 }
+
+.flex0 {
+    -webkit-flex: 0 auto;
+    flex: 0 auto;
+}

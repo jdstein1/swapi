@@ -13,26 +13,22 @@
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-  <div id="ejs"></div>
   <main class="flex-container">
-    <aside class="flex-item">
+    <aside class="flex0">
       <!-- Sidebar modules -->
-      <div class="card">
+      <div class="card" id="favMost">
         <h3>Favorite Character</h3>
-        <ul>
-          <li id="favMost"></li>
-        </ul>
       </div>
-      <div class="card">
+      <div class="card" id="favLeast">
         <h3>Least Favorite Character</h3>
-        <ul>
-          <li id="favLeast"></li>
-        </ul>
       </div>
       <div class="card">
-        <h3>How long are those opening crawls?</h3>
-        <dl id="crawls"></dl>
-        <canvas id="graph"></canvas>
+        <h3>How many words long are those opening crawls?</h3>
+        <div id="crawls">
+          <div class="flex-container" id="crawls_bars"></div>
+          <div class="flex-container" id="crawls_labels"></div>
+        </div>
+        <!-- <dl id="crawls"></dl> -->
       </div>
     </aside>
     <article class="flex-item deck flex-container">
@@ -40,7 +36,7 @@
       <div class="flex-item card flex-container">
         <div class="flex-item movie">
           <!-- <img src="movie_poster.jpg" alt="Movie Title"> -->
-          <h2>Movie Title</h2>
+          <h3>Movie Title</h3>
           <h4>Director</h4>
           <ul>
             <li>Main Character 1</li>
@@ -50,7 +46,7 @@
         </div>
         <div class="flex-item movie">
           <!-- <img src="movie_poster.jpg" alt="Movie Title"> -->
-          <h2>Movie Title</h2>
+          <h3>Movie Title</h3>
           <h4>Director</h4>
           <ul>
             <li>Main Character 1</li>

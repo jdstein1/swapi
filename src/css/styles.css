@@ -1,20 +1,27 @@
 /* styles.css */
 
+html {font-size: 100%;}
+
 body {
   background:#eee;
   color:#111;
+  font-size: 1rem;
 }
 
 main {
   background:#eef;
   padding:1em;
   margin:0;
+  flex-wrap:nowrap;
 }
 
 aside {
   background:#fee;
   padding:1em;
   margin:0;
+  min-width: 25%;
+  width: 30%;
+  max-width: 40%;
 }
 
 article {
@@ -27,6 +34,7 @@ article {
   background:#ccc;
   padding:1em;
   margin:0 0 1em;
+  position: relative;
 }
 
 aside > .card {
@@ -65,4 +73,86 @@ dd {
   font-weight: bold;
   display: inline-block;
   margin-left: 0.5em;
+}
+
+.least:before, 
+.most:before {
+  content:'\1F44E';
+  margin: 0 0.25em;
+  padding: 0 0.25em;
+  background:black;
+  width:2em;
+  height:2em;
+  border-radius: 1em;
+  line-height: 2em;
+}
+.most:before {
+  /*content:'\02713';*/
+  content:'\1F44D';
+}
+
+#crawls {
+  text-align: center;
+  position: relative;
+}
+/*#crawls:before {
+  content:"Word Count";
+  text-align: center;
+  background: pink;
+  position:absolute;
+  top:0;
+  right:0;
+  bottom:auto;
+  left:0;
+  transform-origin: bottom left;
+  transform: rotate(270deg);
+  width: 300px;
+}
+*/#crawls_bars {
+  position: relative;
+  margin-left: 2em;
+  height:200px;
+  flex-wrap:nowrap;
+  align-items: flex-end;
+  border-left: 1px black solid;
+  border-bottom: 1px black solid;
+}
+#crawls_bars:before, 
+#crawls_bars:after {
+  content:"0";
+  text-align: right;
+  width:3em;
+  position:absolute;
+  top:auto;
+  right:auto;
+  bottom:-0.5em;
+  left:-3.5em;
+}
+#crawls_bars:after {
+  content:"600";
+  top:-0.5em;
+  bottom:auto;
+}
+#crawls_bars .barBox {
+  position: relative;
+}
+#crawls_bars .barBox > .bar {
+  position: absolute;
+  bottom: 0;
+}
+#crawls_labels {
+  margin-left: 2em;
+  flex-wrap:nowrap;
+}
+#crawls_labels .label {
+  overflow: auto;
+  overflow-x: hidden;
+  overflow-y: visible;
+  white-space: normal;
+  text-align: left;
+  color:#333;
+}
+
+.card h3 {
+  border-bottom: 1px solid rgba(0,0,0,0.18);
 }
