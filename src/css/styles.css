@@ -12,16 +12,15 @@ main {
   background:#eef;
   padding:1em;
   margin:0;
-  flex-wrap:nowrap;
 }
 
 aside {
   background:#fee;
   padding:1em;
   margin:0;
-  min-width: 25%;
-  width: 30%;
-  max-width: 40%;
+  /*min-width: 25%;*/
+  /*width: 30%;*/
+  /*max-width: 40%;*/
 }
 
 article {
@@ -30,10 +29,14 @@ article {
   margin:0;
 }
 
+#deck {
+  flex-flow: row wrap;
+}
+
 .card {
   background:#ccc;
   padding:1em;
-  margin:0 0 1em;
+  margin:0 0.5em 1em;
   position: relative;
 }
 
@@ -49,6 +52,9 @@ article > .card {
   background:#ddc;
   padding:1em;
   margin:0;
+  min-width:15em;
+  width:50%;
+  max-width:100%;
 }
 
 .card > .movie:first-of-type {
@@ -108,12 +114,14 @@ dd {
   transform: rotate(270deg);
   width: 300px;
 }
-*/#crawls_bars {
+*/
+#crawls_bars {
   position: relative;
   margin-left: 2em;
   height:200px;
   flex-wrap:nowrap;
   align-items: flex-end;
+  background: white;
   border-left: 1px black solid;
   border-bottom: 1px black solid;
 }
@@ -135,10 +143,13 @@ dd {
 }
 #crawls_bars .barBox {
   position: relative;
+  height:100%;
 }
 #crawls_bars .barBox > .bar {
   position: absolute;
   bottom: 0;
+  margin:0 0 0 10%;
+  width:80%;
 }
 #crawls_labels {
   margin-left: 2em;
@@ -156,3 +167,5 @@ dd {
 .card h3 {
   border-bottom: 1px solid rgba(0,0,0,0.18);
 }
+
+.director:before {content:"directed by: ";}

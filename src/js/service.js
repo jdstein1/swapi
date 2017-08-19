@@ -4,7 +4,6 @@ function getSwapi (methodType, url, callback) {
   console.group('START getSwapi: ', url);
 
   var data;
-  var api = swapiRoot+url;
 
   var xhr = new XMLHttpRequest();
   console.log('xhr: ', xhr);
@@ -14,28 +13,28 @@ function getSwapi (methodType, url, callback) {
   // xhr.addEventListener("error", transferFailed);
   // xhr.addEventListener("abort", transferCanceled);
 
-  xhr.open(methodType, api, true);
+  xhr.open(methodType, url, true);
   xhr.onreadystatechange = function() {
     // console.log('xhr.readyState: ', xhr.readyState);
     // console.log('xhr.status: ', xhr.status);
       if (xhr.readyState === 1) {
-        console.log('OPENED');
+        // console.log('OPENED: ', xhr.readyState);
       } else if (xhr.readyState === 2) {
-        console.log('HEADERS_RECEIVED');
+        // console.log('HEADERS_RECEIVED: ', xhr.readyState);
       } else if (xhr.readyState === 3) {
-        console.log('LOADING');
+        // console.log('LOADING: ', xhr.readyState);
       } else if (xhr.readyState === 4 && xhr.status === 200) {
-        console.log('DONE');
+        // console.log('DONE: ', xhr.readyState);
         data = JSON.parse(xhr.response);
         // console.log('data: ', data);
         callback(data);
       } else {
-        console.log('UNSENT');
+        // console.log('UNSENT: ', xhr.readyState);
       }
       // console.groupEnd();
   }
 
-  // console.log('api: ', api);
+  console.log('url: ', url);
   xhr.send(null);
 
   console.groupEnd();
