@@ -35,7 +35,7 @@ article {
 
 .card {
   background:#ccc;
-  padding:1em;
+  padding:0.5em;
   margin:0 0.5em 1em;
   position: relative;
 }
@@ -168,4 +168,26 @@ dd {
   border-bottom: 1px solid rgba(0,0,0,0.18);
 }
 
-.director:before {content:"directed by: ";}
+.director:before, 
+.characters:before {
+  content:"directed by";
+  display: block;
+  color: rgba(0,0,0,0.5);
+  font-size: 1rem;
+  font-weight: normal;
+}
+.characters:before {
+  content:"top 3 characters";
+}
+.characters {
+  list-style-type: disc;
+  list-style-position: inside;
+}
+.nowrap {
+  white-space: nowrap;
+}
+small {
+  color:#111 !important;
+  font-size: 0.875em !important;
+  font-weight: normal !important;
+}

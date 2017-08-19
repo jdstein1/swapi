@@ -4,6 +4,8 @@ var newDiv = document.createElement('div'),
   newCard = document.createElement('div'), 
   newMovie = document.createElement('div'), 
   newPoster = document.createElement('img'), 
+  newUL = document.createElement('ul'), 
+  newLI = document.createElement('li'), 
   newH3 = document.createElement('h3'), 
   newH4 = document.createElement('h4'), 
   newH5 = document.createElement('h5');
@@ -135,20 +137,23 @@ function renderCards (data) {
     var posterEl = newPoster.cloneNode();
     posterEl.classList.add("poster");
     posterEl.src = "img/sw"+movie.episode_id+".jpg";
-    posterEl.style.cssText = "width:5em; height:auto; float:left; margin:0 0.5em 0 0;";
+    posterEl.style.cssText = "width:5em; height:auto; float:left; margin:0 1rem 1rem 0;";
 
     // clone an H3 for the movie title
     var titleEl = newH3.cloneNode();
     titleEl.classList.add("title");
-    titleEl.innerHTML = movie.title;
+    titleEl.innerHTML = `<small>Star Wars <span class="nowrap">Episode ${movie.episode_id}:</span></small><br>${movie.title}`;
 
     // clone an H4 for the movie director
     var dirEl = newH4.cloneNode();
     dirEl.classList.add("director");
     dirEl.innerHTML = movie.director;
 
+    var charsEl = newUL.cloneNode();
+    charsEl.classList.add("characters");
+
     // loop over characters array for the first 3 characters
-    /*for (var j = 0; j < 3; j++) {
+    for (var j = 0; j < 3; j++) {
 
       console.log(movie.characters[j]);
       var urlChar = movie.characters[j];
@@ -156,19 +161,20 @@ function renderCards (data) {
       getSwapi("GET", urlChar, function (stuff) {
         console.log('stuff: ', stuff.name);
 
-        var charEl = newH5.cloneNode();
+        var charEl = newLI.cloneNode();
         charEl.classList.add("character");
         charEl.innerHTML = stuff.name;
-        movieEl.appendChild(charEl);
+        charsEl.appendChild(charEl);
 
       });
 
-    }*/
+    }
 
     // append movie info elements to container
     movieEl.appendChild(posterEl);
     movieEl.appendChild(titleEl);
     movieEl.appendChild(dirEl);
+    movieEl.appendChild(charsEl);
 
     // append movie container to card
     cardEl.appendChild(movieEl);
