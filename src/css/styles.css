@@ -58,6 +58,7 @@ small {
 
 /* BASIC SIDEBAR STYLES */
 
+/* cute thumbs up/down emoji for most/least fav characters */
 .least:before, 
 .most:before {
   content:'\1F44E';
@@ -70,7 +71,6 @@ small {
   line-height: 2em;
 }
 .most:before {
-  /*content:'\02713';*/
   content:'\1F44D';
 }
 
@@ -80,16 +80,20 @@ small {
   text-align: center;
   position: relative;
 }
-#crawls_bars {
+#crawls_bars, 
+#crawls_labels {
   position: relative;
   margin-left: 2em;
-  height:200px;
   flex-wrap:nowrap;
+}
+#crawls_bars {
+  height:200px;
   align-items: flex-end;
   background: white;
   border-left: 1px black solid;
   border-bottom: 1px black solid;
 }
+/* insert min and max values along y-axis */
 #crawls_bars:before, 
 #crawls_bars:after {
   content:"0";
@@ -116,10 +120,6 @@ small {
   margin:0 0 0 10%;
   width:80%;
 }
-#crawls_labels {
-  margin-left: 2em;
-  flex-wrap:nowrap;
-}
 #crawls_labels .label {
   overflow: auto;
   overflow-x: hidden;
@@ -140,6 +140,7 @@ small {
   padding:0.5em;
   margin:0 0.5em 1em;
   position: relative;
+  border:1px black solid;
 }
 
 aside > .card {
@@ -180,6 +181,4 @@ article > .card {
 }
 .poster {
   width:7.5em; height:auto; 
-  /*float:right; margin:0 0 1rem 1rem; */
-  border:0.5em white solid;
 }
