@@ -14,6 +14,9 @@ var newDiv = document.createElement('div'),
 // add attributes to new DOM elements.
 newCard.classList.add("card","flex-item","flex-container");
 newMovie.classList.add("movie","flex-item");
+newPoster.classList.add("poster");
+newPoster.style.cssText = "width:5em; height:auto; float:left; margin:0 1rem 1rem 0;";
+
 
 // cache some existing DOM elements.
 var deckEl = document.getElementById('deck'), 
@@ -22,7 +25,9 @@ var deckEl = document.getElementById('deck'),
   crawlsLabels = document.getElementById('crawls_labels');
 
 // empty array for films data.
-var films = [];
+var filmsArr = [], charsArr = [];
+      console.log('filmsArr: ', filmsArr);
+      console.log('charsArr: ', charsArr);
 
 // if these defaults display in the view, we have a problem:
 var favMost = "Harry Potter"; // default most fav character
@@ -47,14 +52,45 @@ callSwapi("GET", swapiRoot+"people/"+randomVal(18,87), renderFavLeast);
 
 // cal SWAPI to get films array.
 callSwapi("GET", swapiRoot+"films", function (data) {
-  console.log('callSwapi("GET", swapiRoot+"films"): ', data);
+
+  console.log('data: ', data);
+
   // put array of films into a variable
   films = data.results;
-  console.log('films.length: ', films.length);
+  console.log('filmsArr.length: ', filmsArr.length);
+
   // execute function that renders bar graph
   renderGraph(films);
+
+  for (var i = 0; i < films.length; i++) {
+
+    filmsArr.push(films[i]);
+
+    var characters = films[i].characters;
+
+    // new array in the film data to store 3 character names
+    filmsArr[i].characterNames = [];
+
+    for (var j = 0; j < 3; j++) {
+      console.log('characters[j]: ', characters[j]);
+      var url = characters[j];
+
+      callSwapi("GET", url, function (char) {
+        console.log('char: ', char);
+        // var name = data.name;
+        // // add names to films array object
+        // data = [];
+        charsArr.push(char);
+        // console.log('data: ', data);
+      })
+
+      console.log('filmsArr: ', filmsArr);
+      console.log('charsArr: ', charsArr);
+    }
+  }
   // execute function that renders film cards
   renderCards(films);
+  // console.log('filmsArr: ', filmsArr);
 })
 
 /* START Utility Functions */
@@ -89,13 +125,6 @@ function renderFavLeast (data) {
   // console.groupEnd();
 }
 
-function renderChar (data) {
-  console.group('START renderChar');
-  console.log('data: ', data);
-  // var label = `<h5 class="label">${data.name}</h5>`;
-  console.groupEnd();
-}
-
 function renderGraph (data) {
   // console.group('START renderGraph');
   // console.log('data: ', data);
@@ -108,7 +137,7 @@ function renderGraph (data) {
     // console.log('label: ', label);
     crawlsLabels.innerHTML += label;
 
-    var bar = `<div class="flex-item barBox" id="bar${data[i].episode_id}" style="width:${(100/data.length)}%;">
+    var bar = `<div class="flex-item barBox" id="bar${data[i].episode_id}">
     <div class="flex-item bar" id="bar${data[i].episode_id}" style="height:${(data[i].opening_crawl.length/600)*100}%; background:hsl(
     ${(360/data.length)*data[i].episode_id}
     ,90%,70%);">${data[i].opening_crawl.length}</div>
@@ -137,19 +166,17 @@ function renderCards (data) {
       var cardEl = newCard.cloneNode();
       cardEl.id = "card"+k;
       console.log('cardEl: ', cardEl);
-      k++;
     }
     console.dir(cardEl);
 
 
     // clone a DIV for the movie info container
     var movieEl = newMovie.cloneNode();
+    movieEl.id = "movie"+i;
 
     // clone an H3 for the movie title
     var posterEl = newPoster.cloneNode();
-    posterEl.classList.add("poster");
     posterEl.src = "img/sw"+movie.episode_id+".jpg";
-    posterEl.style.cssText = "width:5em; height:auto; float:left; margin:0 1rem 1rem 0;";
 
     // clone an H3 for the movie title
     var titleEl = newH3.cloneNode();
@@ -166,16 +193,18 @@ function renderCards (data) {
 
     // loop over characters array for the first 3 characters
     for (var j = 0; j < 3; j++) {
-      console.log('i: ', i);
-      console.log('j: ', j);
+      console.log('k (card): ', k);
+      console.log('i (movie): ', i);
+      console.log('j (char): ', j);
 
-      console.log('films['+i+']characters['+j+']: ', films[i].characters[j]);
+      console.log('filmsArr['+i+']characters['+j+']: ', films[i].characters[j]);
       var urlChar = movie.characters[j];
       // console.log('character['+j+']: ', callSwapi("GET", urlChar, renderChar));
       callSwapi("GET", urlChar, function (data) {
 
         console.log('character: ', data.name);
         var charEl = newLI.cloneNode();
+        charEl.id = "character"+i+"_"+j;
         charEl.classList.add("character");
         charEl.innerHTML = data.name;
         charsEl.appendChild(charEl);
@@ -196,6 +225,10 @@ function renderCards (data) {
     // append card to deck
     deckEl.appendChild(cardEl);
 
+    if (i%2 === 0 ) {
+      k++;
+    }
+
 /*    var movie = `<div class="flex-item movie">
   <img src="${movie.poster}" alt="${movie.title}">
   <h3>${movie.title}</h3>
@@ -212,8 +245,15 @@ function renderCards (data) {
 
   // for (var i = 0; i < data.length; i++) {
   //   console.log('data[i]: ', data[i]);
-  //   films.push(data[i]);
+  //   filmsArr.push(data[i]);
   // }
-  // console.log('films: ', films);
+  // console.log('filmsArr: ', filmsArr);
+  console.groupEnd();
+}
+
+function renderChar (data) {
+  console.group('START renderChar');
+  console.log('data: ', data);
+  // var label = `<h5 class="label">${data.name}</h5>`;
   console.groupEnd();
 }

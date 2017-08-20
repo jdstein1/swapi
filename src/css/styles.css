@@ -1,5 +1,7 @@
 /* styles.css */
 
+/* BASIC HTML ELEMENT STYLES */
+
 html {font-size: 100%;}
 
 body {
@@ -28,43 +30,6 @@ article {
   padding:1em;
   margin:0;
 }
-
-#deck {
-  flex-flow: row wrap;
-}
-
-.card {
-  background:#ccc;
-  padding:0.5em;
-  margin:0 0.5em 1em;
-  position: relative;
-}
-
-aside > .card {
-  background:#cdd;
-}
-
-article > .card {
-  background:#dcd;
-}
-
-.movie {
-  background:#ddc;
-  padding:1em;
-  margin:0;
-  min-width:15em;
-  width:50%;
-  max-width:100%;
-}
-
-.card > .movie:first-of-type {
-  margin-right:0.25em;
-}
-
-.card > .movie:last-of-type {
-  margin-left:0.25em;
-}
-
 dl {}
 dt {
   font-weight: normal;
@@ -80,6 +45,18 @@ dd {
   display: inline-block;
   margin-left: 0.5em;
 }
+
+small {
+  color:#111 !important;
+  font-size: 0.875em !important;
+  font-weight: normal !important;
+}
+
+/* UTILITY CLASSES */
+
+.nowrap {white-space: nowrap;}
+
+/* BASIC SIDEBAR STYLES */
 
 .least:before, 
 .most:before {
@@ -97,24 +74,12 @@ dd {
   content:'\1F44D';
 }
 
+/* SIDEBAR MOVIE CRAWLS BAR GRAPH STYLES */
+
 #crawls {
   text-align: center;
   position: relative;
 }
-/*#crawls:before {
-  content:"Word Count";
-  text-align: center;
-  background: pink;
-  position:absolute;
-  top:0;
-  right:0;
-  bottom:auto;
-  left:0;
-  transform-origin: bottom left;
-  transform: rotate(270deg);
-  width: 300px;
-}
-*/
 #crawls_bars {
   position: relative;
   margin-left: 2em;
@@ -164,8 +129,43 @@ dd {
   color:#333;
 }
 
+/* MOVIE INFO CARD STYLES */
+
+#deck {
+  flex-flow: row wrap;
+}
+
+.card {
+  background:#ccc;
+  padding:0.5em;
+  margin:0 0.5em 1em;
+  position: relative;
+}
+
+aside > .card {
+  background:#cdd;
+}
+
+article > .card {
+  background:#dcd;
+}
+
+.movie {
+  background:#ddc;
+  padding:1em;
+  margin:0;
+  min-width:15em;
+  width:50%;
+  max-width:100%;
+}
+
 .card h3 {
   border-bottom: 1px solid rgba(0,0,0,0.18);
+}
+
+.characters {
+  list-style-type: disc;
+  list-style-position: inside;
 }
 
 .director:before, 
@@ -176,18 +176,7 @@ dd {
   font-size: 1rem;
   font-weight: normal;
 }
+
 .characters:before {
   content:"top 3 characters";
-}
-.characters {
-  list-style-type: disc;
-  list-style-position: inside;
-}
-.nowrap {
-  white-space: nowrap;
-}
-small {
-  color:#111 !important;
-  font-size: 0.875em !important;
-  font-weight: normal !important;
 }
