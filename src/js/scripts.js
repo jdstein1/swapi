@@ -25,7 +25,8 @@ var deckEl = document.getElementById('deck'),
   crawlsLabels = document.getElementById('crawls_labels');
 
 // empty array for films data.
-var filmsArr = [], charsArr = [];
+var filmsArr = [], 
+  charsArr = [];
       console.log('filmsArr: ', filmsArr);
       console.log('charsArr: ', charsArr);
 
@@ -34,64 +35,37 @@ var favMost = "Harry Potter"; // default most fav character
 var favLeast = "Rupert Grint"; // default least fav character
 
 /* START AJAX Calls */
-// callSwapi("GET", swapiRoot+"djfhgjhd", function (data) {
-//   console.log('djfhgjhd data: ', data);
-// });
-
 
 /** 
-* API appears to have no person at ID 17.  I'm assigning a range of 
-* characters to most favorite and another range to the least favorites.
+* NOTE: the "people" API appears to have no person at ID 17.  I'm 
+* assigning a range of characters to most favorite and another range 
+* to the least favorite.
 */
-// cal SWAPI to get a random MOST favorite character and render in page 
-// with a unique callback.
-callSwapi("GET", swapiRoot+"people/"+randomVal(1,16), renderFavMost);
-// cal SWAPI to get a random LEAST favorite character and render in page 
-// with a unique callback.
-callSwapi("GET", swapiRoot+"people/"+randomVal(18,87), renderFavLeast);
 
-// cal SWAPI to get films array.
-callSwapi("GET", swapiRoot+"films", function (data) {
+// cal SWAPI to get a random MOST favorite character and render
+callSwapi("GET", swapiRoot+"people/"+randomVal(1,16)).then(renderFavMost);
 
-  console.log('data: ', data);
+// cal SWAPI to get a random LEAST favorite character and render
+callSwapi("GET", swapiRoot+"people/"+randomVal(18,87)).then(renderFavLeast);
+
+// cal SWAPI to get all films and make an array
+callSwapi("GET", swapiRoot+"films")
+.then(function (data) {
+
+  console.group('MAKE FILMS DATA AVAILABLE');
+  console.log('films data: ', data);
 
   // put array of films into a variable
   films = data.results;
-  console.log('filmsArr.length: ', filmsArr.length);
+  console.log('films: ', films);
 
-  // execute function that renders bar graph
-  renderGraph(films);
+  console.groupEnd();
 
-  for (var i = 0; i < films.length; i++) {
-
-    filmsArr.push(films[i]);
-
-    var characters = films[i].characters;
-
-    // new array in the film data to store 3 character names
-    filmsArr[i].characterNames = [];
-
-    for (var j = 0; j < 3; j++) {
-      console.log('characters[j]: ', characters[j]);
-      var url = characters[j];
-
-      callSwapi("GET", url, function (char) {
-        console.log('char: ', char);
-        // var name = data.name;
-        // // add names to films array object
-        // data = [];
-        charsArr.push(char);
-        // console.log('data: ', data);
-      })
-
-      console.log('filmsArr: ', filmsArr);
-      console.log('charsArr: ', charsArr);
-    }
-  }
-  // execute function that renders film cards
-  renderCards(films);
-  // console.log('filmsArr: ', filmsArr);
 })
+.then(renderGraph)
+.then(renderCards)
+.then(renderPeople);
+
 
 /* START Utility Functions */
 
@@ -102,10 +76,11 @@ function randomVal(min, max) {
 /* START Render Functions */
 
 /**
-* function grabs HTML element for most favorite character and 
+* this function grabs HTML element for most favorite character and 
 * adds randomly chosen name to ES6 template literal while appending
-* template to element.
+* template to element in DOM.
 */
+
 function renderFavMost (data) {
   // console.group('START renderFavMost');
   // console.log('data: ', data);
@@ -114,10 +89,11 @@ function renderFavMost (data) {
 }
 
 /**
-* function grabs HTML element for least favorite character and 
+* this function grabs HTML element for least favorite character and 
 * adds randomly chosen name to ES6 template literal while appending
-* template to element.
+* template to element in DOM.
 */
+
 function renderFavLeast (data) {
   // console.group('START renderFavLeast');
   // console.log('data: ', data);
@@ -125,22 +101,21 @@ function renderFavLeast (data) {
   // console.groupEnd();
 }
 
-function renderGraph (data) {
+function renderGraph () {
   // console.group('START renderGraph');
-  // console.log('data: ', data);
 
-  for (var i = 0; i < data.length; i++) {
+  for (var i = 0; i < films.length; i++) {
 
-    // console.log('data['+i+']: ', data[i]);
+    // console.log('films['+i+']: ', films[i]);
 
-    var label = `<h5 class="flex-item label" id="label${data[i].episode_id}" style="width:${(100/data.length)}%;">${data[i].title}</h5>`;
+    var label = `<h5 class="flex-item label" id="label${films[i].episode_id}" style="width:${(100/films.length)}%;">${films[i].title}</h5>`;
     // console.log('label: ', label);
     crawlsLabels.innerHTML += label;
 
-    var bar = `<div class="flex-item barBox" id="bar${data[i].episode_id}">
-    <div class="flex-item bar" id="bar${data[i].episode_id}" style="height:${(data[i].opening_crawl.length/600)*100}%; background:hsl(
-    ${(360/data.length)*data[i].episode_id}
-    ,90%,70%);">${data[i].opening_crawl.length}</div>
+    var bar = `<div class="flex-item barBox" id="bar${films[i].episode_id}">
+    <div class="flex-item bar" id="bar${films[i].episode_id}" style="height:${(films[i].opening_crawl.length/600)*100}%; background:hsl(
+    ${(360/films.length)*films[i].episode_id}
+    ,90%,70%);">${films[i].opening_crawl.length}</div>
     </div>`;
     // console.log('bar: ', bar);
     crawlsBars.innerHTML += bar;
@@ -149,16 +124,22 @@ function renderGraph (data) {
   // console.groupEnd();
 }
 
-function renderCards (data) {
+/**
+* FUNCTION renderCards()
+* loop over the array of film data to grab bits of information.  take 
+* those bits and create new DOM objects to put them in.  append those 
+* DOM objects to the 'div#deck' element.
+*/
+
+function renderCards () {
   console.group('START renderCards');
-  console.log('data: ', data);
   var k = 0;
 
   // loop over films array
-  for (var i = 0; i < data.length; i++) {
+  for (var i = 0; i < films.length; i++) {
 
-    // console.log('data[i]: ', data[i]);
-    var movie = data[i];
+    // console.log('films[i]: ', films[i]);
+    var movie = films[i];
     console.log('movie: ', movie);
 
     // create a card if "i" is odd...
@@ -172,7 +153,7 @@ function renderCards (data) {
 
     // clone a DIV for the movie info container
     var movieEl = newMovie.cloneNode();
-    movieEl.id = "movie"+i;
+    movieEl.dataset.episode = movie.episode_id;
 
     // clone an H3 for the movie title
     var posterEl = newPoster.cloneNode();
@@ -195,21 +176,16 @@ function renderCards (data) {
     for (var j = 0; j < 3; j++) {
       console.log('k (card): ', k);
       console.log('i (movie): ', i);
+      console.log('movie.episode_id: ', movie.episode_id);
       console.log('j (char): ', j);
 
-      console.log('filmsArr['+i+']characters['+j+']: ', films[i].characters[j]);
+      // console.log('filmsArr['+i+']characters['+j+']: ', films[i].characters[j]);
       var urlChar = movie.characters[j];
-      // console.log('character['+j+']: ', callSwapi("GET", urlChar, renderChar));
-      callSwapi("GET", urlChar, function (data) {
-
-        console.log('character: ', data.name);
-        var charEl = newLI.cloneNode();
-        charEl.id = "character"+i+"_"+j;
-        charEl.classList.add("character");
-        charEl.innerHTML = data.name;
-        charsEl.appendChild(charEl);
-
-      });
+      var charEl = newLI.cloneNode();
+      charEl.classList.add("character");
+      charEl.dataset.movie = movie.episode_id;
+      charEl.dataset.url = urlChar;
+      charsEl.appendChild(charEl);
 
     }
 
@@ -229,31 +205,54 @@ function renderCards (data) {
       k++;
     }
 
-/*    var movie = `<div class="flex-item movie">
-  <img src="${movie.poster}" alt="${movie.title}">
-  <h3>${movie.title}</h3>
-  <h4>${movie.director}</h4>
-  <ul>
-    <li>${movie.characters[0]}</li>
-    <li>${movie.characters[1]}</li>
-    <li>${movie.characters[2]}</li>
-  </ul>
-</div>`;*/
-    // var card = `<div class="flex-item card flex-container">${movie}</div>`;
   }
-  // document.getElementById('favLeast').innerHTML = data.name;
 
-  // for (var i = 0; i < data.length; i++) {
-  //   console.log('data[i]: ', data[i]);
-  //   filmsArr.push(data[i]);
-  // }
-  // console.log('filmsArr: ', filmsArr);
+  console.groupEnd();
+
+}
+
+/**
+* FUNCTION renderPeople()
+* loop over the array of list item DOM elements to cache and grab API 
+* URL from each.  
+*/
+
+function renderPeople () {
+  console.group('START renderPeople');
+  var charListItems = document.querySelectorAll(".character");
+  // console.log('charListItems: ', charListItems);
+
+  for (var i = 0; i < charListItems.length; i++) {
+    // console.log('charListItems['+i+']: ', charListItems[i]);
+    var item = charListItems[i];
+    // console.log('charListItems['+i+']: ', charListItems[i].dataset.url);
+    var url = charListItems[i].dataset.url;
+
+    // put API call for individual people in an external function
+    getPeople(item, url);
+
+  }
+
   console.groupEnd();
 }
 
-function renderChar (data) {
-  console.group('START renderChar');
-  console.log('data: ', data);
-  // var label = `<h5 class="label">${data.name}</h5>`;
-  console.groupEnd();
+/**
+* FUNCTION getPeople()
+* Grab name of person from API and put it in the correct DOM element.  
+*/
+
+function getPeople (el, url) {
+  callSwapi("GET", url).then(function (data) {
+
+    console.log('getPeople data: ', data.name);
+
+    console.log('el: ', el);
+
+    var name = "Dumbledore";
+
+    name = data.name;
+
+    el.innerHTML = name;
+
+  });
 }

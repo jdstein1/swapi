@@ -12,13 +12,13 @@ body {
 
 main {
   background:#eef;
-  padding:1em;
+  padding:0.5em;
   margin:0;
 }
 
 aside {
   background:#fee;
-  padding:1em;
+  padding:0.5em;
   margin:0;
   /*min-width: 25%;*/
   /*width: 30%;*/
@@ -27,15 +27,15 @@ aside {
 
 article {
   background:#efe;
-  padding:1em;
+  padding:0.5em;
   margin:0;
 }
-dl {}
-dt {
+ol, ul, dl {}
+li, dt {
   font-weight: normal;
   display: block;
 }
-dt:before {
+li:before, dt:before {
   content:'•';
   margin: 0 0.25em;
   padding: 0 0.25em;
