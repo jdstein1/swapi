@@ -9,7 +9,6 @@
   "main": "server.js",
   "license": "ISC",
   "dependencies": {
-    "bootstrap": "^3.3.7",
-    "ejs": "^1.0.0"
+    "bootstrap": "^3.3.7"
   }
 }
