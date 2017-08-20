@@ -151,12 +151,13 @@ article > .card {
 }
 
 .movie {
-  background:#ddc;
-  padding:1em;
-  margin:0;
+  background:#fff;
+  padding:0.5em 1em;
+  margin:0.25em;
   min-width:15em;
   width:50%;
   max-width:100%;
+  border:1px black solid;
 }
 
 .card h3 {
@@ -178,5 +179,8 @@ article > .card {
 }
 
 .characters:before {
-  content:"top 3 characters";
+  content:"3 main characters";
+}
+.poster {
+  width:7.5em; height:auto; float:right; margin:0 0 1rem 1rem; border:0.5em white solid;
 }

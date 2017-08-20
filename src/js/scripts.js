@@ -15,8 +15,6 @@ var newDiv = document.createElement('div'),
 newCard.classList.add("card","flex-item","flex-container");
 newMovie.classList.add("movie","flex-item");
 newPoster.classList.add("poster");
-newPoster.style.cssText = "width:5em; height:auto; float:left; margin:0 1rem 1rem 0;";
-
 
 // cache some existing DOM elements.
 var deckEl = document.getElementById('deck'), 
@@ -113,8 +111,9 @@ function renderGraph () {
     crawlsLabels.innerHTML += label;
 
     var bar = `<div class="flex-item barBox" id="bar${films[i].episode_id}">
-    <div class="flex-item bar" id="bar${films[i].episode_id}" style="height:${(films[i].opening_crawl.length/600)*100}%; background:hsl(
-    ${(360/films.length)*films[i].episode_id}
+      <div class="flex-item bar" 
+        id="bar${films[i].episode_id}" 
+        style="height:${(films[i].opening_crawl.length/600)*100}%; background:hsl(${(360/films.length)*films[i].episode_id}
     ,90%,70%);">${films[i].opening_crawl.length}</div>
     </div>`;
     // console.log('bar: ', bar);
@@ -244,9 +243,9 @@ function renderPeople () {
 function getPeople (el, url) {
   callSwapi("GET", url).then(function (data) {
 
-    console.log('getPeople data: ', data.name);
+    // console.log('getPeople data: ', data.name);
 
-    console.log('el: ', el);
+    // console.log('el: ', el);
 
     var name = "Dumbledore";
 
