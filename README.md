@@ -22,8 +22,14 @@ These software tools are needed to run this app:
 
 ## Instructions
 
-
 Installing and running is easy!  Follow these steps:
 
 * Clone the repo using this URI: git@github.com:jdstein1/swapi.git
-* Install dependencies
+* Install dependencies:
+    * `$ npm install`
+    * `$ bower install`
+* Run local webserver with this command:
+    * `$ nodemon`
+* Point browser to this URL:
+    * [http://localhost:1138/](http://localhost:1138/)
+* Enjoy!

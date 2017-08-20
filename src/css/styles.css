@@ -102,7 +102,7 @@ small {
   left:-3.5em;
 }
 #crawls_bars:after {
-  content:"600";
+  content:"100";
   top:-0.5em;
   bottom:auto;
 }

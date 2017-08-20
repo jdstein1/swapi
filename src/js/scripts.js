@@ -104,7 +104,10 @@ function renderGraph () {
 
   for (var i = 0; i < films.length; i++) {
 
-    // console.log('films['+i+']: ', films[i]);
+    var wordArr = films[i].opening_crawl.split(/\s+/);
+    console.log('wordArr: ', wordArr);
+    var wordcount = wordArr.length;
+    console.log('wordcount: ', wordcount);
 
     var label = `<h5 class="flex-item label" id="label${films[i].episode_id}" style="width:${(100/films.length)}%;">${films[i].title}</h5>`;
     // console.log('label: ', label);
@@ -113,8 +116,8 @@ function renderGraph () {
     var bar = `<div class="flex-item barBox" id="bar${films[i].episode_id}">
       <div class="flex-item bar" 
         id="bar${films[i].episode_id}" 
-        style="height:${(films[i].opening_crawl.length/600)*100}%; background:hsl(${(360/films.length)*films[i].episode_id}
-    ,90%,70%);">${films[i].opening_crawl.length}</div>
+        style="height:${(wordcount/100)*100}%; background:hsl(${(360/films.length)*films[i].episode_id}
+    ,90%,70%);">${wordcount}</div>
     </div>`;
     // console.log('bar: ', bar);
     crawlsBars.innerHTML += bar;
