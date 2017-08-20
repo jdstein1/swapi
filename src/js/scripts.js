@@ -12,8 +12,8 @@ var newDiv = document.createElement('div'),
   newH5 = document.createElement('h5');
 
 // add attributes to new DOM elements.
-newCard.classList.add("card","flex-item","flex-container");
-newMovie.classList.add("movie","flex-item");
+newCard.classList.add("card","flex1","flex-container");
+newMovie.classList.add("movie","flex1");
 newPoster.classList.add("poster");
 
 // cache some existing DOM elements.
